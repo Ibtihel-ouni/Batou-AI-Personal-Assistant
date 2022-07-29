@@ -1,5 +1,6 @@
 import os
 import subprocess as sp
+import pyautogui
 
 paths = {
     'notepad': "C:\\Windows\\System32\\notepad.exe",
@@ -26,3 +27,8 @@ def open_camera():
 
 def open_calculator():
     sp.Popen(paths['calculator'])
+
+
+def screenshot() -> None:
+    img = pyautogui.screenshot()
+    img.save('C:/Users/ibtih/OneDrive/Bureau/here/screenshot.png')

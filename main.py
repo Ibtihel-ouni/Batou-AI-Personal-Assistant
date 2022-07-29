@@ -7,8 +7,8 @@ from datetime import datetime
 from random import choice
 from pprint import pprint
 
-from functions.online_ops import find_my_ip, play_on_youtube, search_on_google, search_on_wikipedia, send_whatsapp_message
-from functions.offline_ops import open_calculator, open_camera, open_cmd, open_notepad, open_discord
+from functions.online_ops import *
+from functions.offline_ops import *
 from utils import opening_text
 
 
@@ -142,7 +142,37 @@ if __name__ == '__main__':
             message = take_user_input().lower()
             send_whatsapp_message(number, message)
             speak("I've sent the message Madam.")
+
+        elif "send an email" in query:
+            speak("On what email address do I send Madam? Please enter in the console: ")
+            receiver_address = input("Enter email address: ")
+            speak("What should be the subject Madam?")
+            subject = take_user_input().capitalize()
+            speak("What is the message Madam?")
+            message = take_user_input().capitalize()
+            if send_email(receiver_address, subject, message):
+                speak("I've sent the email Madam.")
+            else:
+                speak("Something went wrong while I was sending the mail. Please check the error logs Madam.") 
+                
+        elif 'joke' in query:
+            speak(f"Hope you like this one Madam")
+            joke = get_random_joke()
+            speak(joke)
+            speak("For your convenience, I am printing it on the screen Madam.")
+            pprint(joke)
+
+        elif "advice" in query:
+            speak(f"Here's an advice for you, Cutie")
+            advice = get_random_advice()
+            speak(advice)
+            speak("For your convenience, I am printing it on the screen Madam.")
+            pprint(advice)
             
+        elif 'screenshot' in query:
+            speak("taking screenshot")
+            screenshot()    
+                    
         elif 'the time' in query:
             strTime = datetime.now().strftime("%H:%M:%S")
             speak(f'Madam, the time is {strTime}')
